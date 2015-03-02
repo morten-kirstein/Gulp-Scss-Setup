@@ -59,8 +59,7 @@ gulp.task('sass', function() {
 
 gulp.task('browser-sync', function() {
     browserSync.init(['app/css/*.css'],{
-        proxy: "yourlocal.dev"  
-
+        proxy: "yourlocal.dev:PORT"                      // I use this setup with MAMP
     });
 });
 
