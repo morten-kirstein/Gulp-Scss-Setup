@@ -35,19 +35,18 @@
 
  bourbon.includePaths;
 
- var SassOptions = {
-    sourcemap: true,
-    style: "compact",
-    includePaths: require('node-bourbon').includePaths
-};
+ var  SassOptions = {
+        sourcemap: true,
+        style: "compact",
+        includePaths: require('node-bourbon').includePaths
+      };
 
 gulp.task('sass', function() {
     gulp.src(target.scss_src)                       //  Get the files
-      
       .pipe(plumber())                              //  Make sure gulp continues on errors
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init())                      //  Sourcemap
       .pipe(sass(SassOptions))                      //  Compile all sass
-      // .pipe(minifycss())                         //  Minifycss
+      .pipe(minifycss())                            //  Minifycss
       .pipe(sourcemaps.write())                     //  Add Source File                       
       .pipe(gulp.dest(target.css_dest))             //  Where to put files
       .pipe(notify({message: 'SCSS Processed'}));   //  Notify on process done
@@ -55,12 +54,12 @@ gulp.task('sass', function() {
 
 
  /**
- * 4: BROWSER INIT
+ * 4: BROWSER SYNC
  */
 
 gulp.task('browser-sync', function() {
-    browserSync.init(['app/AuroraESite/StoreAssets/css/*.css'],{
-        proxy: "tm:8000"  
+    browserSync.init(['app/css/*.css'],{
+        proxy: "yourlocal.dev"  
 
     });
 });
@@ -76,6 +75,3 @@ gulp.task('browser-sync', function() {
         gulp.run('sass');
      });
  });
-
-
-
